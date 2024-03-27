@@ -1,7 +1,9 @@
 package com.hyand.modulith.example.api;
 
-import com.hyand.modulith.example.common.Input;
+import com.hyand.modulith.example.api.model.Input;
+import com.hyand.modulith.example.document.DocumentDto;
 import com.hyand.modulith.example.document.DocumentService;
+import com.hyand.modulith.example.masterdata.MasterDataDto;
 import com.hyand.modulith.example.masterdata.MasterDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,10 +23,18 @@ public class Controller {
     @Transactional
     public ResponseEntity<String> receive(Input input) {
         switch (input.inputType()) {
-            case MASTERDATA -> masterDataService.handle(input.id(), input.masterData());
-            case DOCUMENT -> documentService.handle(input.id(), input.document());
+            case MASTERDATA -> masterDataService.handle(mapMasterData(input));
+            case DOCUMENT -> documentService.handle(mapDocument(input));
         }
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    private MasterDataDto mapMasterData(Input input) {
+        return new MasterDataDto(input.id(), input.masterData().key());
+    }
+
+    private DocumentDto mapDocument(Input input) {
+        return new DocumentDto(input.id(), input.document().data());
     }
 
 }

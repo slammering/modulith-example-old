@@ -1,15 +1,20 @@
 package com.hyand.modulith.example.status;
 
-import lombok.extern.slf4j.Slf4j;
+import com.hyand.modulith.example.document.DocumentCompleted;
+import com.hyand.modulith.example.masterdata.MasterDataCompleted;
 import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
 public class StatusEventHandler {
 
     @ApplicationModuleListener
-    public void on(ProcessComplete processComplete) {
-        log.info("Process complete {}", processComplete.id());
+    public void on(MasterDataCompleted masterDataCompleted) {
+       // handle event
+    }
+
+    @ApplicationModuleListener
+    public void on(DocumentCompleted documentCompleted) {
+        // handle event
     }
 }
