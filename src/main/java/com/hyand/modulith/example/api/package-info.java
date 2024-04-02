@@ -1,4 +1,4 @@
 @org.springframework.modulith.ApplicationModule(
-        allowedDependencies = {"masterdata", "document", "common"}
+        allowedDependencies = {"masterdata", "document"}
 )
 package com.hyand.modulith.example.api;

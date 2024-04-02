@@ -1,6 +1,6 @@
-package com.hyand.modulith.example.common;
+package com.hyand.modulith.example.api.model;
 
-import com.hyand.modulith.example.common.enums.InputType;
+import com.hyand.modulith.example.api.model.enums.InputType;
 
 import java.util.UUID;
 

@@ -1,9 +1,9 @@
 package com.hyand.modulith.example.api;
 
-import com.hyand.modulith.example.common.Input;
-import com.hyand.modulith.example.common.MasterData;
-import com.hyand.modulith.example.common.enums.InputType;
-import com.hyand.modulith.example.status.ProcessComplete;
+import com.hyand.modulith.example.api.model.Input;
+import com.hyand.modulith.example.api.model.MasterData;
+import com.hyand.modulith.example.api.model.enums.InputType;
+import com.hyand.modulith.example.masterdata.MasterDataCompleted;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.modulith.test.ApplicationModuleTest;
@@ -22,8 +22,8 @@ public class ApiTest {
         var id = UUID.randomUUID();
         var input = new Input(id, InputType.MASTERDATA, new MasterData("Yeah!"), null);
         scenario.stimulate(() -> controller.receive(input))
-                .andWaitForEventOfType(ProcessComplete.class)
-                .matchingMappedValue(ProcessComplete::id, id)
+                .andWaitForEventOfType(MasterDataCompleted.class)
+                .matchingMappedValue(MasterDataCompleted::id, id)
                 .toArrive();
     }
 }
